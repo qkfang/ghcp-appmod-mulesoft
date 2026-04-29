@@ -44,12 +44,18 @@ resource hostingPlan 'Microsoft.Web/serverfarms@2022-09-01' = {
   properties: {
     reserved: true   // required for Linux
   }
+  tags: {
+    SecurityControl: 'Ignore'
+  }
 }
 
 // ── MySQL Flexible Server ─────────────────────────────────────────────────────
 resource mysqlServer 'Microsoft.DBforMySQL/flexibleServers@2023-06-30' = {
   name: mysqlServerName
   location: location
+  tags: {
+    SecurityControl: 'Ignore'
+  }
   sku: {
     name: 'Standard_B1ms'
     tier: 'Burstable'
@@ -89,6 +95,9 @@ resource mysqlFirewallAzure 'Microsoft.DBforMySQL/flexibleServers/firewallRules@
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: keyVaultName
   location: location
+  tags: {
+    SecurityControl: 'Ignore'
+  }
   properties: {
     sku: {
       family: 'A'
@@ -113,6 +122,9 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
   name: functionAppName
   location: location
   kind: 'functionapp,linux'
+  tags: {
+    SecurityControl: 'Ignore'
+  }
   identity: {
     type: 'SystemAssigned'
   }
