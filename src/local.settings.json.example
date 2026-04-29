@@ -2,7 +2,7 @@
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
     "DB_HOST": "<your-mysql-server>.mysql.database.azure.com",
     "DB_PORT": "3306",
     "DB_USER": "<admin-username>",

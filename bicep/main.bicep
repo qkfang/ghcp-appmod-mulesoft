@@ -39,7 +39,7 @@ resource hostingPlan 'Microsoft.Web/serverfarms@2022-09-01' = {
     tier: 'Dynamic'
   }
   properties: {
-    reserved: true   // required for Linux / Python functions
+    reserved: true   // required for Linux
   }
 }
 
@@ -105,7 +105,7 @@ resource kvSecretDbPassword 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
   }
 }
 
-// ── Azure Function App (Python v2) ───────────────────────────────────────────
+// ── Azure Function App (.NET 8 isolated) ─────────────────────────────────────
 resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
   name: functionAppName
   location: location
@@ -116,7 +116,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
   properties: {
     serverFarmId: hostingPlan.id
     siteConfig: {
-      linuxFxVersion: 'Python|3.11'
+      linuxFxVersion: 'DOTNET-ISOLATED|8.0'
       appSettings: [
         {
           name: 'AzureWebJobsStorage'
@@ -136,7 +136,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         }
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'python'
+          value: 'dotnet-isolated'
         }
         {
           name: 'DB_HOST'
