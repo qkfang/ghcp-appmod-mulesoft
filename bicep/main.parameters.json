@@ -12,7 +12,7 @@
       "value": "admin"
     },
     "mysqlAdminPassword": {
-      "value": "adminPassword>"
+      "value": "adminPassword"
     },
     "mysqlDatabaseName": {
       "value": "bookmyshow"

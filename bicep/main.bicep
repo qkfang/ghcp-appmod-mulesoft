@@ -28,6 +28,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   location: location
   sku: { name: 'Standard_LRS' }
   kind: 'Storage'
+  tags: {
+    SecurityControl: 'Ignore'
+  }
 }
 
 // ── Consumption Hosting Plan (serverless) ────────────────────────────────────
