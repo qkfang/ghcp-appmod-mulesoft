@@ -9,10 +9,10 @@
       "value": "bookmyshow"
     },
     "mysqlAdminLogin": {
-      "value": "<admin-username>"
+      "value": "admin"
     },
     "mysqlAdminPassword": {
-      "value": "<admin-password>"
+      "value": "adminPassword>"
     },
     "mysqlDatabaseName": {
       "value": "bookmyshow"
