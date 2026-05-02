@@ -12,23 +12,21 @@ Migration of the MuleSoft **BookMyShow** application to an **Azure Functions** a
 .
 ├── bicep/
 │   ├── main.bicep               # Bicep template – all Azure resources
-│   ├── main.parameters.json     # Parameters file
-│   └── deploy.ps1               # Deployment helper script
+│   └── deploy.ps1               # Minimal deployment helper script (inline vars)
 ├── mulesoft/                    # Original MuleSoft source (reference only)
 └── src/
     └── MovieFunctionApp/
         ├── MovieFunctionApp.csproj  # .NET 10 isolated worker project
         ├── Program.cs               # Host bootstrap & DI
         ├── host.json                # Functions host configuration
-        ├── local.settings.json      # Local app settings
+        ├── local.settings.json      # Local app settings (gitignored)
         ├── Functions/
-        │   └── MovieFunctions.cs    # HTTP triggers (GetMovies, BookTickets)
+        │   └── MoviesFunctions.cs   # HTTP triggers (GetMovies, BookTickets)
         ├── Data/
         │   └── MovieDbContext.cs    # EF Core in-memory DbContext + seed data
         └── Models/
             ├── Movie.cs
-            ├── Order.cs
-            └── BookingError.cs
+            └── Order.cs
 ```
 
 ---
@@ -40,7 +38,7 @@ Migration of the MuleSoft **BookMyShow** application to an **Azure Functions** a
 | `GET`  | `/api/movies` | List all movies with available seats |
 | `POST` | `/api/movies/{m_id}?no_tickets=N` | Book N tickets for movie `m_id` |
 
-OpenAPI/Swagger metadata is exposed via the `Microsoft.Azure.Functions.Worker.Extensions.OpenApi` extension.
+OpenAPI/Swagger metadata is exposed via the `Microsoft.Azure.Functions.Worker.Extensions.OpenApi` extension. After running locally, the Swagger UI is available at `http://localhost:7275/api/swagger/ui` and the OpenAPI document at `http://localhost:7275/api/swagger.json`.
 
 ### Pricing tiers (from original MuleSoft logic)
 
@@ -69,16 +67,16 @@ dotnet build
 func start
 ```
 
-The app listens on `http://localhost:7071` by default.
+The app listens on `http://localhost:7275` by default (configured in `Properties/launchSettings.json`).
 
 ### Quick test
 
 ```powershell
 # List movies
-curl http://localhost:7071/api/movies
+curl http://localhost:7275/api/movies
 
 # Book 3 tickets for movie 1
-curl -X POST "http://localhost:7071/api/movies/1?no_tickets=3"
+curl -X POST "http://localhost:7275/api/movies/1?no_tickets=3"
 ```
 
 ---
@@ -87,19 +85,21 @@ curl -X POST "http://localhost:7071/api/movies/1?no_tickets=3"
 
 ### 1. Provision infrastructure with Bicep
 
+Use the helper script (edit the inline parameters at the top of the script first, or pass them in):
+
+```powershell
+./bicep/deploy.ps1 -SubscriptionId <sub-id> -ResourceGroup rg-bookmyshow -Location eastus -BaseName movieapp
+```
+
+Or call `az` directly:
+
 ```powershell
 az group create --name rg-bookmyshow --location eastus
 
 az deployment group create `
   --resource-group rg-bookmyshow `
   --template-file bicep/main.bicep `
-  --parameters @bicep/main.parameters.json
-```
-
-Or use the helper script:
-
-```powershell
-./bicep/deploy.ps1
+  --parameters baseName=movieapp location=eastus
 ```
 
 The Bicep template provisions:
