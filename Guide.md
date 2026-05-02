@@ -47,6 +47,8 @@
   > - The migrated code should be under the `src/` folder
   > - Make sure to create Bicep under the `bicep/` folder for Azure resources
   > - Create a minimal `.ps1` script to Bicep deploy — `az deployment` with all inline vars"
+
+- Assign the ticket to coding agent and use `raw` branch that does not have new app yet.
 - Show the agent opening a PR with the migrated Function App, `bicep/main.bicep`, and `deploy.ps1`.
 - Review the PR, leave a comment for a tweak, and merge.
 

@@ -2,6 +2,8 @@
 
 Migration of the MuleSoft **BookMyShow** application to an **Azure Functions** app built on **.NET 10 (isolated worker)**, using **EF Core with an in-memory database** for movie and order data.
 
+> 📖 **Demo Guide**: See [Guide.md](Guide.md) for step-by-step demo instructions including GitHub Copilot Chat, Agent, and Cloud Agent workflows.
+
 ---
 
 ## Project structure
