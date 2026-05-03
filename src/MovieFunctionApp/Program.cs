@@ -17,9 +17,15 @@ builder.ConfigureFunctionsWebApplication();
 var dbName = builder.Configuration["MovieDb:Name"] ?? "MoviesDb";
 builder.Services.AddDbContext<MovieDbContext>(options => options.UseInMemoryDatabase(dbName));
 
-builder.Services.AddOpenTelemetry()
-    .UseFunctionsWorkerDefaults()
-    .UseAzureMonitorExporter();
+var otel = builder.Services.AddOpenTelemetry()
+    .UseFunctionsWorkerDefaults();
+
+// Only wire up the Azure Monitor exporter when a connection string is provided
+// (it's required in Azure but optional locally so the host can start without it).
+if (!string.IsNullOrWhiteSpace(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
+{
+    otel.UseAzureMonitorExporter();
+}
 
 var app = builder.Build();
 
