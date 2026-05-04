@@ -1,5 +1,6 @@
 # Azure Functions local settings (contain secrets)
 src/local.settings.json
+src/**/local.settings.json
 # Python
 __pycache__/
 *.pyc
@@ -7,3 +8,7 @@ __pycache__/
 .venv/
 */**/bin/
 */**/obj/
+
+# Bicep build artifacts (transpiled ARM JSON)
+bicep/*.json
+!bicep/*.parameters.json
