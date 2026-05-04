@@ -8,3 +8,7 @@ __pycache__/
 .venv/
 */**/bin/
 */**/obj/
+
+# Bicep build artifacts (transpiled ARM JSON)
+bicep/*.json
+!bicep/*.parameters.json
