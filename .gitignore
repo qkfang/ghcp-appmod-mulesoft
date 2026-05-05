@@ -1,5 +1,6 @@
 # Azure Functions local settings (contain secrets)
 src/local.settings.json
+src/**/local.settings.json
 # Python
 __pycache__/
 *.pyc
