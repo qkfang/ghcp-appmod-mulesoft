@@ -61,6 +61,8 @@ public class BookTicketsFunction
         {
             return new BadRequestObjectResult(new BookingErrorResponse
             {
+                // NOTE: "avaible" typo is intentional — preserves byte-for-byte parity
+                // with the Mule on-error-continue payload in implementation.xml.
                 Error = $"avaible tickets is only {movie.MAvailable} but you have ordered {noTickets}"
             });
         }

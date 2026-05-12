@@ -21,7 +21,8 @@ project under [`mulesoft/`](../../mulesoft).
 | > 10    | 80               |
 
 If `(m_available - no_tickets) < 0`, a `400 Bad Request` is returned with the
-Mule-style payload `{ "error": "avaible tickets is only X but you have ordered Y" }`.
+Mule-style payload `{ "error": "avaible tickets is only X but you have ordered Y" }`
+(the misspelling of "available" is intentional parity with the original Mule flow).
 
 ## Data store
 
