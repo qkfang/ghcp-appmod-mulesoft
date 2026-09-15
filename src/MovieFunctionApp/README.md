@@ -1,6 +1,6 @@
 # MovieFunctionApp
 
-.NET 8 isolated Azure Functions app migrated from the original Mulesoft project in `../mulesoft/`.
+.NET 10 isolated Azure Functions app migrated from the original Mulesoft project in `../mulesoft/`.
 
 ## Endpoints
 
@@ -47,4 +47,4 @@ A `local.settings.json` is required locally; create one with:
 
 ## Deploy to Azure
 
-See `../bicep/main.bicep` and `../deploy.ps1` in the repository root.
+See `../bicep/main.bicep` and `../bicep/deploy.ps1` in the repository root.

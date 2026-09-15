@@ -39,6 +39,8 @@ Migration of the MuleSoft **BookMyShow** application to an **Azure Functions** a
 |--------|-------|-------------|
 | `GET`  | `/api/movies` | List all movies with available seats |
 | `POST` | `/api/movies/{m_id}?no_tickets=N` | Book N tickets for movie `m_id` |
+| `GET`  | `/api/swagger/ui` | Swagger UI for the API |
+| `GET`  | `/api/swagger.json` | OpenAPI 2.0 document (JSON) |
 
 OpenAPI/Swagger metadata is exposed via the `Microsoft.Azure.Functions.Worker.Extensions.OpenApi` extension.
 
